@@ -1,18 +1,31 @@
+class product {
+  title = 'DEFAULT';
+  imageUrl;
+  decription;
+  price;
+
+  constructor(title, image, desc, price) {
+    this.title = title;
+    this.imageUrl = image;
+    this.decription = desc;
+    this.price = price;
+  }
+}
+
 const productList = {
   products: [
-    {
-      title: 'A Pillow',
-      imageUrl:
-        'https://m.media-amazon.com/images/I/71YAboIsyAL.jpg',
-      price: 53.56,
-      description: 'A soft pillow!',
-    },
-    {
-      title: 'A Carpet',
-      imageUrl: 'https://m.media-amazon.com/images/I/71FAXZVa3KL.jpg',
-      price: 24.99,
-      description: 'Persian Carpet',
-    },
+    new product(
+      'A Pillow',
+      'https://www.fbf-bedandmore.de/out/pictures/master/product/1/139_graubraun.jpg',
+      'A soft pillow!',
+      53.56
+    ),
+    new product(
+      'A Carpet',
+      'https://m.media-amazon.com/images/I/91jubmmoJZL.jpg',
+      'carpet',
+      24.99
+    )
   ],
   render() {
     const renderHook = document.getElementById('app');
