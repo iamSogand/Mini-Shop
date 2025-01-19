@@ -1,8 +1,8 @@
-class product {
-  title = 'DEFAULT';
-  imageUrl;
-  decription;
-  price;
+class Product {
+  // title = 'DEFAULT';
+  // imageUrl;
+  // decription;
+  // price;
 
   constructor(title, image, desc, price) {
     this.title = title;
@@ -12,43 +12,59 @@ class product {
   }
 }
 
-const productList = {
-  products: [
-    new product(
+class ProductItem {
+  constructor(product) {
+    this.product = product;
+  }
+
+  render() {
+    const prodEl = document.createElement('li');
+    prodEl.className = 'product-item';
+    prodEl.innerHTML = `
+      <div>
+        <img src="${this.product.imageUrl}" alt="${this.product.title}">
+        <div class ="product-item__content">
+         <h2>${this.product.title}</h2>
+         <h3>${this.product.price}</h3>
+         <p>${this.product.descripton}</p>
+         <button>Add to Cart </button>
+        </div>
+      </div>
+      `;
+    return prodEl;
+  }
+}
+
+class ProductList {
+  products = [
+    new Product(
       'A Pillow',
       'https://www.fbf-bedandmore.de/out/pictures/master/product/1/139_graubraun.jpg',
       'A soft pillow!',
       53.56
     ),
-    new product(
+    new Product(
       'A Carpet',
       'https://m.media-amazon.com/images/I/91jubmmoJZL.jpg',
       'carpet',
       24.99
-    )
-  ],
+    ),
+  ];
+
+  constructor() {}
+
   render() {
     const renderHook = document.getElementById('app');
     const prodList = document.createElement('ul');
-    prodList.classList = 'product-list';
+    prodList.className = 'product-list';
     for (const prod of this.products) {
-      const prodEl = document.createElement('li');
-      prodEl.className = 'product-item';
-      prodEl.innerHTML = `
-      <div>
-        <img src="${prod.imageUrl}" alt="${prod.title}">
-        <div>
-         <h2>${prod.title}</h2>
-         <h3>${prod.price}</h3>
-         <p>${prod.description}</p>
-         <button>Add to Cart </button>
-        </div>
-      </div>
-      `;
+        const productItem= new ProductItem(prod);
+        const prodEl = productItem.render();
       prodList.append(prodEl);
     }
     renderHook.append(prodList);
-  },
-};
+  }
+}
 
+const productList = new ProductList();
 productList.render();
