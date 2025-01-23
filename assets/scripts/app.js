@@ -14,9 +14,24 @@ class Product {
 
 class ShoppingCart {
   items = [];
+
+  set cartItems(value) {
+    this.items = value;
+    this.totalOutPut.innerHTML = `<h2>Total: /$${this.totalAmount} </h2>`;
+  }
+
+  get totalAmount() {
+    const sum = this.items.reduce(
+      (preValue, curItem) => preValue + curItem.price,
+      0
+    );
+    return sum;
+  }
+
   addProduct(product) {
-    this.items.push(product);
-    this.totalOutPut.innerHTML = `<h2>Total: /$${1} </h2>`;
+    const updatedItems = [...this.items];
+    updatedItems.push(product);
+    this.cartItems = updatedItems;
   }
 
   render() {
@@ -105,6 +120,8 @@ class Shop {
 }
 
 class App {
+  static cart;
+
   static init() {
     const shop = new Shop();
     shop.render();
