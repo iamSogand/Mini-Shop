@@ -119,7 +119,7 @@ class ProductItem extends Component {
 }
 
 class ProductList extends Component {
-  products = [];
+  #products = [];
 
   constructor(renderHookId) {
     super(renderHookId, false);
@@ -128,7 +128,7 @@ class ProductList extends Component {
   }
 
   fetchProducts() {
-    this.products = [
+    this.#products = [
       new Product(
         'A Pillow',
         'https://www.fbf-bedandmore.de/out/pictures/master/product/1/139_graubraun.jpg',
@@ -146,7 +146,7 @@ class ProductList extends Component {
   }
 
   renderProducts() {
-    for (const prod of this.products) {
+    for (const prod of this.#products) {
       new ProductItem(prod, 'prod-list');
     }
   }
@@ -155,7 +155,7 @@ class ProductList extends Component {
     this.createRootElement('ul', 'product-list', [
       new ElementAttribute('id', 'prod-list'),
     ]);
-    if (this.products && this.products.length > 0) {
+    if (this.#products && this.#products.length > 0) {
       this.renderProducts();
     }
   }
